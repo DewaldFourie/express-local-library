@@ -41,6 +41,26 @@ AuthorSchema.virtual("dod_formatted").get(function() {
     : " ";
 });
 
+AuthorSchema.virtual("lifespan").get(function() {
+    let dob = ''
+    let dod = ''
+    let hyphen =' '
+    if (this.date_of_birth) {
+        dob = "Born: " + DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED)
+    } else {
+        dob = ""
+    }
+    if (this.date_of_death) {
+        dod = "Died: " + DateTime.fromJSDate(this.date_of_death).toLocaleString(DateTime.DATE_MED)
+        hyphen = " - "
+    } else {
+        dod = ""
+    }
+
+    let lifeSpan = `${dob} ${hyphen} ${dod}`
+    return lifeSpan
+})
+
 
 // export model
 module.exports = mongoose.model("Author", AuthorSchema);
