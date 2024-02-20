@@ -37,9 +37,14 @@ exports.bookinstance_create_get = asyncHandler(async (req, res, next) => {
         .sort({ title: 1 })
         .exec()
 
+    // Define dynamic status list
+    const status_list = ['Maintenance', 'Available', 'Loaned', 'Reserved'];
+
+
     res.render("bookinstance_form", {
         title: "Create BookInstance",
         book_list: allBooks,
+        status_list: status_list,
     });
 });
 
@@ -80,9 +85,12 @@ exports.bookinstance_create_post = [
                 .sort({ title: 1 })
                 .exec()
 
+            const status_list = ['Maintenance', 'Available', 'Loaned', 'Reserved'];
+
             res.render("bookinstance_form", {
                 title: "Create BookInstance",
                 book_list: allBooks,
+                status_list: status_list,
                 selected_book: bookInstance.book._id,
                 errors: errors.array(),
                 bookinstance: bookInstance,

@@ -24,11 +24,11 @@ block content
       label(for='status') Status:
       select#status.form-control(name='status' required)
         option(value='') --Please select a status--
-        each val in ['Maintenance', 'Available', 'Loaned', 'Reserved']
-          if undefined===bookinstance || bookinstance.status!=val
-            option(value=val)= val
+        each status in status_list
+          if undefined===bookinstance || bookinstance.status!=status
+            option(value=status)= status
           else 
-            option(value=val selected)= val
+            option(value=status selected)= status
 
     button.btn.btn-primary(type='submit') Submit
 
