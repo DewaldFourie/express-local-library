@@ -58,7 +58,7 @@ exports.genre_create_post = [
 
         if (!errors.isEmpty()) {
             // There are errors. Render form again with sanitized values / error msgs
-            res.render("genre_from", {
+            res.render("genre_form", {
                 title: "Create Genre",
                 genre: genre,
                 errors: errors.array()
@@ -68,7 +68,9 @@ exports.genre_create_post = [
         else {
             // Data from form is valid.
             // Check if genre with same name already exists.
-            const genreExists = await Genre.findOne({ name: req.body.name }).exec();
+            const genreExists = await Genre.findOne({ name: req.body.name })
+                .collation({ locale: "en", strength: 2 })
+                .exec();
             if (genreExists) {
                 // Genre exists, redirect to its detail page.
                 res.redirect(genreExists.url);
