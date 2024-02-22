@@ -30,15 +30,11 @@ AuthorSchema.virtual("url").get(function() {
 });
 
 AuthorSchema.virtual("dob_formatted").get(function() {
-    return this.date_of_birth ? 
-    DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED)
-    : " ";
+    return DateTime.fromJSDate(this.date_of_birth).toISODate(); // format 'YYYY-MM-DD
 });
 
 AuthorSchema.virtual("dod_formatted").get(function() {
-    return this.date_of_death ? 
-    DateTime.fromJSDate(this.date_of_death).toLocaleString(DateTime.DATE_MED)
-    : " ";
+    return DateTime.fromJSDate(this.date_of_death).toISODate(); // format 'YYYY-MM-DD'
 });
 
 AuthorSchema.virtual("lifespan").get(function() {
