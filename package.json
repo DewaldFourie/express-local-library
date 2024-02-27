@@ -6,8 +6,8 @@
   },
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "devstart": "nodemon ./bin/www",
+    "start": "node express-local-library/bin/www",
+    "devstart": "nodemon express-local-library/bin/www",
     "serverstart": "DEBUG=express-local-library:* npm run devstart"
   },
   "dependencies": {
